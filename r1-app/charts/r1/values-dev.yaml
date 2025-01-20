@@ -1,0 +1,7 @@
+backend:
+  service:
+    nodePort: 30002
+
+frontend:
+  service:
+    nodePort: 30003
