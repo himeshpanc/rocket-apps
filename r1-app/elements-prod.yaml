@@ -1,0 +1,8 @@
+key:
+  components:
+    - givenName: r1-app
+      environment: dev
+      namespace: argocd
+    - givenName: r1-app
+      environment: prod
+      namespace: argocd
