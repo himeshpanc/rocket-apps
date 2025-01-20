@@ -14,7 +14,7 @@ spec:
               repoURL: https://github.com/himeshpanc/rocket-apps.git
               revision: HEAD
               files:
-                - path: r1-app/elements-prod.yaml
+                - path: r1-app/elements-dev.yaml
           - list:
               elements: []
               elementsYaml: '{{ .key.components | toJson }}'
