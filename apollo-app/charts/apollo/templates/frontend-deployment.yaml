@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: react-app
+  name: react-app
+spec:
+  replicas: {{ .Values.frontend.replicaCount }}
+  selector:
+    matchLabels:
+      app: react-app
+  template:
+    metadata:
+      labels:
+        app: react-app
+    spec:
+      containers:
+      - image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+        name: react-app
+        imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+        ports: 
+        - containerPort: {{ .Values.frontend.service.targetPort }}
+        resources:
+          {{- toYaml .Values.frontend.resources | nindent 12 }}

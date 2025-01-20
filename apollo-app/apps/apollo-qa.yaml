@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apollo-qa
+spec:
+  destination:
+    name: in-cluster
+    namespace: qa
+  source:
+    path: apollo-app/charts/apollo
+    repoURL: https://github.com/himeshp/gitops.git
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+      - values-qa.yaml
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

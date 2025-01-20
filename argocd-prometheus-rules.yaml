@@ -1,0 +1,61 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: argocd-alerts
+  namespace: monitoring
+  labels:
+    app: kube-prometheus-stack
+    release: my-kube-prometheus-stack
+spec:
+  groups:
+  - name: argocd.rules
+    rules:
+    - alert: ArgoAppOutOfSync
+      annotations:
+        summary: "'{{ $labels.name }}' Application has synchronization issue"
+      expr: argocd_app_info{sync_status="OutOfSync"} == 1
+      for: 1m
+      labels:
+        severity: warning
+    - alert: ArgoApplicationDegraded
+      annotations:
+        summary: "'{{ $labels.name }}' Application is in degraded state"
+      expr: argocd_app_info{health_status="Degraded"} == 1
+      for: 5m
+      labels:
+        severity: critical
+    - alert: ArgoApplicationMissing
+      annotations:
+        summary: "ArgoCD application metrics are missing"
+      expr: absent(argocd_app_info{}) == 1
+      for: 5m
+      labels:
+        severity: critical
+    - alert: ArgoApplicationSyncFailed
+      annotations:
+        summary: "'{{ $labels.name }}' Application sync status is unknown"
+      expr: argocd_app_info{sync_status="Unknown"} == 1
+      for: 10m
+      labels:
+        severity: warning
+    - alert: ArgoControllerNotReady
+      annotations:
+        summary: "ArgoCD controller is not ready"
+      expr: sum(argocd_app_controller_connected) < 1
+      for: 5m
+      labels:
+        severity: critical
+    - alert: ArgoHighReconciliationErrors
+      annotations:
+        summary: "'{{ $labels.name }}' Application has high reconciliation errors"
+      expr: rate(argocd_app_reconciliation_error[5m]) > 0.1
+      for: 15m
+      labels:
+        severity: warning
+    - alert: ArgoResourcesOutOfSync
+      annotations:
+        summary: "'{{ $labels.name }}' Application has multiple resources out of sync"
+      expr: sum by (name) (argocd_app_resource_info{sync_status="OutOfSync"}) > 3
+      for: 15m
+      labels:
+        severity: warning

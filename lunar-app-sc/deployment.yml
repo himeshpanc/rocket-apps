@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: lunar-app-sc
+  name: lunar-app-sc
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: lunar-app-sc
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: lunar-app-sc
+    spec:
+      containers:
+      - image: himeshp/lunar-app:v1
+        name: lunar-app
+        imagePullPolicy: Always
+        ports: 
+        - containerPort: 3000
