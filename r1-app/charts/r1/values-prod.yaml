@@ -1,7 +1,7 @@
 backend:
   service:
-    nodePort: 30000
+    nodePort: 30014
 
 frontend:
   service:
-    nodePort: 30001
+    nodePort: 30015
