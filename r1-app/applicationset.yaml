@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: r1-appset
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  generators:
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/himeshpanc/rocket-apps.git
+              revision: HEAD
+              files:
+                - path: r1-app/elements.yaml
+          - list:
+              elements: []
+              elementsYaml: '{{ .key.components | toJson }}'
+  template:
+    metadata:
+      name: "{{.givenName}}-{{.environment}}"
+    spec:
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+      source:
+        repoURL: https://github.com/himeshpanc/rocket-apps.git
+        targetRevision: HEAD
+        path: r1-app/charts/r1
+        helm:
+          valueFiles:
+            - values.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.namespace}}'

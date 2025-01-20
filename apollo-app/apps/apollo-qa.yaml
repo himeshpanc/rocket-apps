@@ -8,7 +8,7 @@ spec:
     namespace: qa
   source:
     path: apollo-app/charts/apollo
-    repoURL: https://github.com/himeshp/gitops.git
+    repoURL: https://github.com/himeshpanc/rocket-apps.git
     targetRevision: HEAD
     helm:
       valueFiles:

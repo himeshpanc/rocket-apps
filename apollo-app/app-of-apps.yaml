@@ -8,7 +8,7 @@ spec:
     namespace: argocd
   source:
     path: apollo-app/apps
-    repoURL: https://github.com/himeshp/gitops.git
+    repoURL: https://github.com/himeshpanc/rocket-apps.git
     targetRevision: HEAD
   project: default
   syncPolicy:
