@@ -13,6 +13,11 @@ spec:
       valueFiles:
         - values.yaml
         - values-qa.yaml
+      parameters:
+        - name: frontend.service.nodePort
+          value: "32001"
+        - name: backend.service.nodePort
+          value: "32000"
   destination:
     server: https://kubernetes.default.svc
     namespace: rollout-app-qa

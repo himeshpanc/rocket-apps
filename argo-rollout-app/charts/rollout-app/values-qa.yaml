@@ -1,19 +1,33 @@
-replicaCount: 2
+frontend:
+  replicaCount: 2
+  image:
+    tag: qa-latest
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+  rollout:
+    strategy:
+      blueGreen:
+        autoPromotionEnabled: false
+        scaleDownDelaySeconds: 60
 
-image:
-  tag: qa-latest
-
-rollout:
-  strategy:
-    blueGreen:
-      autoPromotionEnabled: false  # Manual promotion in QA for testing
-      scaleDownDelaySeconds: 60    # Longer delay for testing
-      previewReplicaCount: 1
-
-resources:
-  limits:
-    cpu: 750m
-    memory: 768Mi
-  requests:
-    cpu: 375m
-    memory: 384Mi
+backend:
+  replicaCount: 2
+  image:
+    tag: qa-latest
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+  rollout:
+    strategy:
+      blueGreen:
+        autoPromotionEnabled: false
+        scaleDownDelaySeconds: 60

@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: {{ include "rollout-app.fullname" . }}-frontend
+  labels:
+    {{- include "rollout-app.labels" . | nindent 4 }}
+    app.kubernetes.io/component: frontend
+spec:
+  replicas: {{ .Values.frontend.replicaCount }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      {{- include "rollout-app.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: frontend
+  template:
+    metadata:
+      labels:
+        {{- include "rollout-app.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.frontend.service.targetPort }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.frontend.resources | nindent 12 }}
+  strategy:
+    blueGreen:
+      activeService: {{ .Values.frontend.rollout.strategy.blueGreen.activeService }}
+      previewService: {{ .Values.frontend.rollout.strategy.blueGreen.previewService }}
+      autoPromotionEnabled: {{ .Values.frontend.rollout.strategy.blueGreen.autoPromotionEnabled }}
+      scaleDownDelaySeconds: {{ .Values.frontend.rollout.strategy.blueGreen.scaleDownDelaySeconds }}
+      previewReplicaCount: {{ .Values.frontend.rollout.strategy.blueGreen.previewReplicaCount }}

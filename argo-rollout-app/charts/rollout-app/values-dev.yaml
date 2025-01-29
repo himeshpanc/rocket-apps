@@ -1,19 +1,33 @@
-replicaCount: 1
+frontend:
+  replicaCount: 1
+  image:
+    tag: dev-latest
+  resources:
+    limits:
+      cpu: 300m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  rollout:
+    strategy:
+      blueGreen:
+        autoPromotionEnabled: true
+        scaleDownDelaySeconds: 10
 
-image:
-  tag: dev-latest
-
-rollout:
-  strategy:
-    blueGreen:
-      autoPromotionEnabled: true  # Auto promote in dev environment
-      scaleDownDelaySeconds: 10   # Faster cleanup in dev
-      previewReplicaCount: 1
-
-resources:
-  limits:
-    cpu: 500m
-    memory: 512Mi
-  requests:
-    cpu: 250m
-    memory: 256Mi
+backend:
+  replicaCount: 1
+  image:
+    tag: dev-latest
+  resources:
+    limits:
+      cpu: 300m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  rollout:
+    strategy:
+      blueGreen:
+        autoPromotionEnabled: true
+        scaleDownDelaySeconds: 10
