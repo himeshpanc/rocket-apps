@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  tag: dev-latest
+
+rollout:
+  strategy:
+    blueGreen:
+      autoPromotionEnabled: true  # Auto promote in dev environment
+      scaleDownDelaySeconds: 10   # Faster cleanup in dev
+      previewReplicaCount: 1
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi

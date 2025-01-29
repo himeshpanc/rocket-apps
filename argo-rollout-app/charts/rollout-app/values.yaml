@@ -1,0 +1,37 @@
+replicaCount: 3
+
+image:
+  repository: nginx  # Replace with your image
+  tag: latest
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+rollout:
+  strategy:
+    blueGreen:
+      activeService: rollout-app-active
+      previewService: rollout-app-preview
+      autoPromotionEnabled: false
+      scaleDownDelaySeconds: 30
+      previewReplicaCount: 1
+      antiAffinity: 
+        preferredDuringSchedulingIgnoredDuringExecution:
+          weight: 100
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  limits:
+    cpu: 1
+    memory: 1Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
