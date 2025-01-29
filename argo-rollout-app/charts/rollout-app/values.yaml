@@ -6,7 +6,7 @@ image:
   pullPolicy: IfNotPresent
 
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "argo-rollouts-app"
 
 rollout:
   strategy:
@@ -46,7 +46,7 @@ backend:
     type: NodePort
     port: 3000
     targetPort: 3000
-    nodePort: 30000
+    nodePort: 31000
   resources:
     limits:
       cpu: 300m
@@ -57,8 +57,8 @@ backend:
   rollout:
     strategy:
       blueGreen:
-        activeService: rollout-backend-active
-        previewService: rollout-backend-preview
+        activeService: argo-rollouts-app-backend-active
+        previewService: argo-rollouts-app-backend-preview
         autoPromotionEnabled: false
         scaleDownDelaySeconds: 30
         previewReplicaCount: 1
@@ -73,7 +73,7 @@ frontend:
     type: NodePort
     port: 3003
     targetPort: 3003
-    nodePort: 30001
+    nodePort: 31001
   resources:
     limits:
       cpu: 300m
@@ -84,8 +84,8 @@ frontend:
   rollout:
     strategy:
       blueGreen:
-        activeService: rollout-frontend-active
-        previewService: rollout-frontend-preview
+        activeService: argo-rollouts-app-frontend-active
+        previewService: argo-rollouts-app-frontend-preview
         autoPromotionEnabled: false
         scaleDownDelaySeconds: 30
         previewReplicaCount: 1
