@@ -4,7 +4,7 @@ metadata:
   name: apollo-qa
 spec:
   destination:
-    name: in-cluster
+    name: my-cluster
     namespace: qa
   source:
     path: apollo-app/charts/apollo
