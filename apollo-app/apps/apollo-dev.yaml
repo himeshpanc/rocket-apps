@@ -4,7 +4,7 @@ metadata:
   name: apollo-dev
 spec:
   destination:
-    name: my-cluster
+    name: himesh-corp-mac
     namespace: dev
   source:
     path: apollo-app/charts/apollo
