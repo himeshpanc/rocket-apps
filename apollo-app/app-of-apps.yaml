@@ -4,7 +4,7 @@ metadata:
   name: apollo-app-of-apps
 spec:
   destination:
-    name: in-cluster
+    name: himesh-corp-mac
     namespace: argocd
   source:
     path: apollo-app/apps
