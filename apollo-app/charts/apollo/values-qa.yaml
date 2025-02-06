@@ -1,5 +1,5 @@
 backend:
-  replicaCount: 2
+  replicaCount: 1
   resources:
     limits:
       cpu: 400m
@@ -9,7 +9,7 @@ backend:
       memory: 192Mi
 
 frontend:
-  replicaCount: 2
+  replicaCount: 1
   resources:
     limits:
       cpu: 400m
