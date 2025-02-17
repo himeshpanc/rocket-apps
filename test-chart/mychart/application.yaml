@@ -11,7 +11,8 @@ spec:
     path: test-chart/mychart
     helm:
       values: |
-        config: null
+        config:
+          key1: value1
   destination:
     server: https://kubernetes.default.svc
     namespace: default
