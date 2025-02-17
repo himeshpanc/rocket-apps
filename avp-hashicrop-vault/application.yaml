@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: avp-hashicorp-vault
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/himeshpanc/rocket-apps.git
+    targetRevision: main
+    path: avp-hashicorp-vault
+    plugin:
+      name: argocd-vault-plugin
+      env:
+        - name: VAULT_ADDR
+          value: "https://vault.<your-region>.hashicorp.cloud:8200"  # Replace with your actual HCP Vault URL
+        - name: VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-secret   # Kubernetes Secret storing the Vault token
+              key: VAULT_TOKEN
+        - name: AVP_TYPE
+          value: "vault"
+        - name: AVP_AUTH_TYPE
+          value: "token"
+  destination:
+    name: himesh-corp-mac
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
