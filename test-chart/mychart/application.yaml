@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: <YOUR_REPO_URL>
-    targetRevision: HEAD
-    path: mychart
+    repoURL: https://github.com/himeshpanc/rocket-apps
+    targetRevision: main
+    path: test-chart/mychart
     helm:
       values: |
         config: null
