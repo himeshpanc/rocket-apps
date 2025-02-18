@@ -6,8 +6,8 @@ spec:
   project: default
   source:
     repoURL: https://github.com/himeshpanc/rocket-apps.git
-    targetRevision: vault-argo-test
-    path: HEAD
+    targetRevision: HEAD
+    path: argocd-vault/vault-resources
     plugin:
       name: argocd-vault-plugin
       envFrom:
