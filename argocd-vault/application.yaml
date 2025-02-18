@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault-app
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/himeshpanc/rocket-apps.git
+    targetRevision: vault-argo-test
+    path: argocd-vault/vault-resources
+    plugin:
+      name: argocd-vault-plugin
+      envFrom:
+        - secretRef:
+            name: vault-secret
+  destination:
+    name: argocd-staging-shared-eks
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
