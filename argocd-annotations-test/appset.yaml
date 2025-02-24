@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: test-appset
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - env: dev
+  template:
+    metadata:
+      name: test-app-{{.env}}
+    spec:
+      project: default
+      sources:
+        - repoURL: https://github.com/himeshpanc/rocket-apps.git
+          path: "argocd-annotations-test/overlays/{{.env}}"
+          targetRevision: main
+          kustomize:
+            commonAnnotations:
+              TEST_ANNOTATION: "kustomize-annotation"
+        - repoURL: https://github.com/himeshpanc/rocket-apps.git
+          path: "argocd-annotations-test/overlays/{{.env}}"
+          targetRevision: main
+          plugin:
+            name: helm
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: test-ns-{{.env}}
