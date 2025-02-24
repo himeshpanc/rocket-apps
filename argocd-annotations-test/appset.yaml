@@ -17,14 +17,19 @@ spec:
         - repoURL: https://github.com/himeshpanc/rocket-apps.git
           path: "argocd-annotations-test/overlays/{{.env}}"
           targetRevision: main
-          kustomize:
-            commonAnnotations:
-              TEST_ANNOTATION: "kustomize-annotation"
+          plugin:
+            name: oam-v1.0
+          annotations:
+            argocd.argoproj.io/sync-wave: "-1"
         - repoURL: https://github.com/himeshpanc/rocket-apps.git
           path: "argocd-annotations-test/overlays/{{.env}}"
           targetRevision: main
-          plugin:
-            name: oam-v1.0
+          kustomize:
+            commonAnnotationsEnvsubst: true
+            commonAnnotations:
+              ARGOCD_APP_NAME: ${ARGOCD_APP_NAME}
+          annotations:
+            argocd.argoproj.io/sync-wave: "1"
       destination:
         server: https://kubernetes.default.svc
         namespace: test-ns-{{.env}}
