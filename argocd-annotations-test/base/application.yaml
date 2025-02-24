@@ -4,10 +4,6 @@ metadata:
   name: test-app
 spec:
   components:
-    - name: test-ns
-      type: namespace
-      properties:
-        name: test-ns-dev
     - name: backend
       type: webservice
       properties:
