@@ -19,6 +19,14 @@ spec:
           env:
           - name: ARGOCD_APP_NAME
             value: test-app-{{.env}}
+          - name: ARGOCD_APP_NAMESPACE
+            value: test-ns-{{.env}}
+          - name: ARGOCD_APP_SOURCE_PATH
+            value: argocd-annotations-test/overlays/{{.env}}
+          - name: ARGOCD_APP_SOURCE_REPO_URL
+            value: https://github.com/himeshpanc/rocket-apps.git
+          - name: ARGOCD_APP_SOURCE_TARGET_REVISION
+            value: HEAD
         repoURL: https://github.com/himeshpanc/rocket-apps.git
         targetRevision: HEAD
         path: argocd-annotations-test/overlays/{{.env}}
@@ -29,3 +37,6 @@ spec:
         automated:
           prune: true
           selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true

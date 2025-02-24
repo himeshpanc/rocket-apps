@@ -18,6 +18,7 @@ spec:
         ports:
           - port: 3000
             expose: true
+        namespace: ${ARGOCD_APP_NAMESPACE}
       traits:
         - type: scaler
           properties:
