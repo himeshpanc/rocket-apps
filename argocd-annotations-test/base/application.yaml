@@ -5,20 +5,17 @@ metadata:
 spec:
   components:
     - name: test-ns
-      type: wk-namespace
+      type: namespace
       properties:
         name: test-ns-dev
     - name: backend
-      type: wk-deployment
+      type: webservice
       properties:
-        replicas: 1
-        containers:
-          - name: backend
-            image: himeshp/lunar-app:v2
+        image: himeshp/lunar-app:v2
+        ports:
+          - port: 3000
+            expose: true
       traits:
-        - type: wk-services
+        - type: scaler
           properties:
-            services:
-              - ports:
-                  - name: http
-                    port: 3000
+            replicas: 1
