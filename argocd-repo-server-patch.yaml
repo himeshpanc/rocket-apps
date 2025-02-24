@@ -12,34 +12,31 @@ spec:
       labels:
         app.kubernetes.io/name: argocd-repo-server
     spec:
+      serviceAccountName: argocd-repo-server
       initContainers:
       - name: kubevela
-        image: nginx:1.21.6
+        image: alpine:3.14
         command:
-          - bash
+          - sh
           - '-c'
           - |
-            #!/usr/bin/env bash
-            set -eo pipefail
-            curl -fsSl https://kubevela.io/script/install.sh | bash -s 1.6.4
-        env:
-          - name: VELA_INSTALL_DIR
-            value: /custom-tools
-        resources:
-          limits:
-            cpu: 50m
-            memory: 64Mi
-          requests:
-            cpu: 10m
-            memory: 32Mi
+            wget -O /custom-tools/vela https://github.com/kubevela/kubevela/releases/download/v1.6.4/vela-v1.6.4-linux-arm64.tar.gz && \
+            tar -xzf /custom-tools/vela -C /custom-tools && \
+            chmod +x /custom-tools/vela
         volumeMounts:
           - name: custom-tools
             mountPath: /custom-tools
       containers:
+      - name: argocd-repo-server
+        image: quay.io/argoproj/argocd:v2.8.0
+        command: ["/usr/local/bin/argocd-repo-server"]
+        volumeMounts:
+        - name: custom-tools
+          mountPath: /usr/local/bin/vela
+          subPath: vela
       - name: vela
-        image: nginx
-        command:
-          - /var/run/argocd/argocd-cmp-server
+        image: quay.io/argoproj/argocd:v2.8.0
+        command: ["/usr/local/bin/argocd-cmp-server"]
         env:
           - name: KUBECONFIG
             value: /kubeconfig
