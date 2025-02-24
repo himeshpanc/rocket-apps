@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+  namespace: argocd
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: argocd-repo-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: argocd-repo-server
+    spec:
+      initContainers:
+      - name: kubevela
+        image: nginx:1.21.6
+        command:
+          - bash
+          - '-c'
+          - |
+            #!/usr/bin/env bash
+            set -eo pipefail
+            curl -fsSl https://kubevela.io/script/install.sh | bash -s 1.6.4
+        env:
+          - name: VELA_INSTALL_DIR
+            value: /custom-tools
+        resources:
+          limits:
+            cpu: 50m
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
+        volumeMounts:
+          - name: custom-tools
+            mountPath: /custom-tools
+      containers:
+      - name: vela
+        image: nginx
+        command:
+          - /var/run/argocd/argocd-cmp-server
+        env:
+          - name: KUBECONFIG
+            value: /kubeconfig
+        volumeMounts:
+          - name: var-files
+            mountPath: /var/run/argocd
+          - name: vela-cli-dir
+            mountPath: /.vela
+          - name: kubeconfig
+            mountPath: /kubeconfig
+            subPath: kubeconfig
+          - name: plugins
+            mountPath: /home/argocd/cmp-server/plugins
+          - name: vela-cmp
+            mountPath: /home/argocd/cmp-server/config/plugin.yaml
+            subPath: plugin.yaml
+          - name: cmp-tmp
+            mountPath: /tmp
+          - name: custom-tools
+            mountPath: /usr/local/bin/vela
+            subPath: vela
+      volumes:
+      - name: custom-tools
+        emptyDir: {}
+      - name: var-files
+        emptyDir: {}
+      - name: vela-cli-dir
+        emptyDir: {}
+      - name: kubeconfig
+        secret:
+          secretName: argocd-repo-server-kubeconfig
+          optional: true
+      - name: plugins
+        emptyDir: {}
+      - name: vela-cmp
+        configMap:
+          name: vela-cmp
+      - name: cmp-tmp
+        emptyDir: {}

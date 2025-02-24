@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vela-cmp
+  namespace: argocd
+data:
+  plugin.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: vela
+    spec:
+      version: v1.0
+      init:
+        command: ["vela", "traits"]
+      generate:
+        command: ["sh"]
+        args:
+          - -c
+          - |
+            vela dry-run -f application-config.yaml
+      discover:
+        find:
+          glob: "**/*-config.yaml"
