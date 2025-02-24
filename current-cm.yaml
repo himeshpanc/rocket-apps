@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  configManagementPlugins: |
+    - name: helm
+      generate:
+        command: ["helm", "template", ".", "--name-template", "{{.name}}"]
+    - name: oam-v1.0
+      generate:
+        command: ["vela", "template"]
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"configManagementPlugins":"- name: helm\n  generate:\n    command: [\"helm\", \"template\", \".\", \"--name-template\", \"{{.name}}\"]\n"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2025-01-15T06:02:06Z","labels":{"app.kubernetes.io/name":"argocd-cm","app.kubernetes.io/part-of":"argocd"},"name":"argocd-cm","namespace":"argocd","resourceVersion":"839","uid":"61fa6557-a2e1-46d9-b307-fc2970f0528c"}}
+  creationTimestamp: "2025-01-15T06:02:06Z"
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cm
+  namespace: argocd
+  resourceVersion: "187499"
+  uid: 61fa6557-a2e1-46d9-b307-fc2970f0528c

@@ -17,3 +17,6 @@ data:
     - name: helm
       generate:
         command: ["helm", "template", ".", "--name-template", "{{.name}}"]
+    - name: oam-v1.0
+      generate:
+        command: ["vela", "template"]
