@@ -14,15 +14,15 @@ spec:
     spec:
       project: default
       sources:
-        - repoURL: https://github.com/himeshpanc/rocket-apps.git
-          path: "argocd-annotations-test/overlays/{{.env}}"
+        - repoURL: https://github.com/himeshpanc/rocket-apps
+          path: argocd-annotations-test/overlays/{{.env}}
           targetRevision: main
           plugin:
             name: oam-v1.0
           annotations:
             argocd.argoproj.io/sync-wave: "-1"
-        - repoURL: https://github.com/himeshpanc/rocket-apps.git
-          path: "argocd-annotations-test/overlays/{{.env}}"
+        - repoURL: https://github.com/himeshpanc/rocket-apps
+          path: argocd-annotations-test/overlays/{{.env}}
           targetRevision: main
           kustomize:
             commonAnnotationsEnvsubst: true
