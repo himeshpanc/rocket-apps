@@ -8,6 +8,9 @@ spec:
       type: webservice
       properties:
         image: himeshp/lunar-app:v2
+        annotations:
+          ARGOCD_APP_NAME: ${ARGOCD_APP_NAME}
+          TEST_ANNOTATION: "kustomize-annotation"
         ports:
           - port: 3000
             expose: true
