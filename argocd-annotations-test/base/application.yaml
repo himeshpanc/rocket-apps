@@ -10,6 +10,10 @@ spec:
         image: himeshp/lunar-app:v2
         annotations:
           ARGOCD_APP_NAME: ${ARGOCD_APP_NAME}
+          ARGOCD_APP_NAMESPACE: ${ARGOCD_APP_NAMESPACE}
+          ARGOCD_APP_SOURCE_PATH: ${ARGOCD_APP_SOURCE_PATH}
+          ARGOCD_APP_SOURCE_REPO_URL: ${ARGOCD_APP_SOURCE_REPO_URL}
+          ARGOCD_APP_SOURCE_TARGET_REVISION: ${ARGOCD_APP_SOURCE_TARGET_REVISION}
           TEST_ANNOTATION: "kustomize-annotation"
         ports:
           - port: 3000
