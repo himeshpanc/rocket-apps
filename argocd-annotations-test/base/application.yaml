@@ -1,0 +1,24 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: test-app
+spec:
+  components:
+    - name: test-ns
+      type: wk-namespace
+      properties:
+        name: test-ns-dev
+    - name: backend
+      type: wk-deployment
+      properties:
+        replicas: 1
+        containers:
+          - name: backend
+            image: himeshp/lunar-app:v2
+      traits:
+        - type: wk-services
+          properties:
+            services:
+              - ports:
+                  - name: http
+                    port: 3000
