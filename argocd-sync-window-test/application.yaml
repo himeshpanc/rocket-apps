@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/himeshpanc/sync-window-test
+    repoURL: https://github.com/himeshpanc/rocket-apps.git
     targetRevision: HEAD
-    path: manifests
+    path: argocd-sync-window-test/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: sync-window-test
