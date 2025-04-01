@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: slack-test-app
-  namespace: slack-test
+  namespace: argocd
 spec:
   selector:
     matchLabels:
