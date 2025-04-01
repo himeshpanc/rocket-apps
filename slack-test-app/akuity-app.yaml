@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: argocd
+    namespace: slack-test
   source:
     path: slack-test-app
     repoURL: https://github.com/himeshpanc/rocket-apps.git
