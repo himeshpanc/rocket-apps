@@ -7,8 +7,8 @@ metadata:
     notifications.argoproj.io/subscribe.on-sync-succeeded.slack.slack: hp-slack-ak-test
 spec:
   destination:
+    server: https://kubernetes.default.svc
     namespace: argocd
-    name: in-cluster
   source:
     path: slack-test-app
     repoURL: https://github.com/himeshpanc/rocket-apps.git
