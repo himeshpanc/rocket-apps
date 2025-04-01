@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: slack-test-app
-  namespace: akuity  # Important: This should be in the akuity namespace
+  namespace: argocd  # Important: This should be in the argocd namespace
   annotations:
     notifications.argoproj.io/subscribe.on-sync-succeeded.slack.slack: hp-slack-ak-test
 spec:
