@@ -2,13 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: slack-test-app
-  namespace: argocd  # Important: This should be in the argocd namespace
   annotations:
     notifications.argoproj.io/subscribe.on-sync-succeeded.slack.slack: hp-slack-ak-test
 spec:
   destination:
     name: in-cluster
-    namespace: slack-test
+    namespace: argocd
   source:
     path: slack-test-app
     repoURL: https://github.com/himeshpanc/rocket-apps.git
