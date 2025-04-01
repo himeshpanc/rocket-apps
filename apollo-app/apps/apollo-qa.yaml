@@ -2,6 +2,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: apollo-qa
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack.slack: hp-slack-ak-test 
 spec:
   destination:
     name: himesh-corp-mac
