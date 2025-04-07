@@ -1,2 +1,5 @@
 argocd-vault/vault-auth-secret.yaml
 argocd-sync-window-test/README.md
+argocd-notifications-cm.yaml
+argocd-notifications-secret.yaml
+pr-noti-comment-fico.2025-04-07.private-key.pem
