@@ -21,6 +21,8 @@ spec:
   template:
     metadata:
       name: "{{.givenName}}-{{.environment}}"
+      annotations:
+        notifications.argoproj.io/subscribe.on-deployed.github: ""
     spec:
       project: default
       syncPolicy:
