@@ -4,6 +4,7 @@ metadata:
   name: apollo-dev
   annotations:
     notifications.argoproj.io/subscribe.on-sync-succeeded.slack.slack: hp-slack-ak-test
+    notifications.argoproj.io/subscribe.on-deployed.github: ""
 spec:
   destination:
     name: himesh-corp-mac
