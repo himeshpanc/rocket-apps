@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: apollo-app-of-apps
   annotations:
-    notifications.argoproj.io/subscribe.on-sync-succeeded.slack.slack: hp-slack-ak-test
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: hp-slack-ak-test
     notifications.argoproj.io/subscribe.on-deployed.github: ""
 spec:
   destination:
