@@ -10,5 +10,5 @@ spec:
     protocol: TCP
     targetPort: {{ .Values.backend.service.targetPort }}
   selector:
-    app: apollo-app
+    app: {{ .Values.backend.label | default "apollo-app" }}
   type: {{ .Values.backend.service.type }}

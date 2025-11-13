@@ -1,5 +1,6 @@
 backend:
   replicaCount: 4
+  label: apollo-backend
   resources:
     limits:
       cpu: 500m
