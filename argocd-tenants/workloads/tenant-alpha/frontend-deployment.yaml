@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tenant-alpha-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tenant-alpha-frontend
+  template:
+    metadata:
+      labels:
+        app: tenant-alpha-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: himeshp/react-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3003
+        resources:
+          limits:
+            cpu: 300m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi

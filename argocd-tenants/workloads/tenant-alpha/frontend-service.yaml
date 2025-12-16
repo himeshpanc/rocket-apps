@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tenant-alpha-frontend
+spec:
+  type: ClusterIP
+  selector:
+    app: tenant-alpha-frontend
+  ports:
+  - port: 3003
+    protocol: TCP
+    targetPort: 3003

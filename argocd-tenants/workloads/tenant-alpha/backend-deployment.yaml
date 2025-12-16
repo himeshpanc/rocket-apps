@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tenant-alpha-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tenant-alpha-backend
+  template:
+    metadata:
+      labels:
+        app: tenant-alpha-backend
+    spec:
+      containers:
+      - name: backend
+        image: himeshp/lunar-app:v2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 300m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tenant-beta-backend
+spec:
+  type: ClusterIP
+  selector:
+    app: tenant-beta-backend
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000

@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: tenant-beta
+  namespace: argocd
+spec:
+  description: Tenant Beta project
+  sourceRepos:
+  - https://github.com/himeshpanc/rocket-apps.git
+  destinations:
+  - namespace: qa
+    server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - name: admin
+    description: Tenant Beta administrators
+    groups:
+    - REPLACE_ME_BETA_SSO_GROUP
+    policies:
+    - p, proj:tenant-beta:admin, applications, get, tenant-beta/*, allow
+    - p, proj:tenant-beta:admin, applications, list, tenant-beta/*, allow
+    - p, proj:tenant-beta:admin, applications, sync, tenant-beta/*, allow
+    - p, proj:tenant-beta:admin, applications, action/*, tenant-beta/*, allow
+    - p, proj:tenant-beta:admin, projects, get, tenant-beta, allow
+    - p, proj:tenant-beta:admin, projects, list, tenant-beta, allow
