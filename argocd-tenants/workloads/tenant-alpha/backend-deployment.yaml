@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: tenant-alpha-backend
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: tenant-alpha-backend
