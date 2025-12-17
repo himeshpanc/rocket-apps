@@ -10,9 +10,7 @@ spec:
   source:
     repoURL: https://github.com/himeshpanc/rocket-apps.git
     targetRevision: HEAD
-    path: argocd-tenants/manifests
-    directory:
-      recurse: true
+    path: argocd-tenants/bootstrap
   project: default
   syncPolicy:
     automated:
