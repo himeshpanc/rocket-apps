@@ -20,7 +20,7 @@ spec:
   - name: admin
     description: Tenant Alpha administrators
     groups:
-    - REPLACE_ME_ALPHA_SSO_GROUP
+    - argocd-tenant-alpha
     policies:
     - p, proj:tenant-alpha:admin, applications, get, tenant-alpha/*, allow
     - p, proj:tenant-alpha:admin, applications, list, tenant-alpha/*, allow

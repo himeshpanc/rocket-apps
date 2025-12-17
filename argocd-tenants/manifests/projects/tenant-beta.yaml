@@ -20,7 +20,7 @@ spec:
   - name: admin
     description: Tenant Beta administrators
     groups:
-    - REPLACE_ME_BETA_SSO_GROUP
+    - argocd-tenant-beta
     policies:
     - p, proj:tenant-beta:admin, applications, get, tenant-beta/*, allow
     - p, proj:tenant-beta:admin, applications, list, tenant-beta/*, allow
