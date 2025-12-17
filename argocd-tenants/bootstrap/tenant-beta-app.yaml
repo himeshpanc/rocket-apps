@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: argocd-tenants/workloads/tenant-beta
   destination:
-    server: https://kubernetes.default.svc
+    name: himesh-corp-mac
     namespace: qa
   syncPolicy:
     automated:
